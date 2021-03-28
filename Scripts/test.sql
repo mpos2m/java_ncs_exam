@@ -1,13 +1,10 @@
-select tno, tname from title;
+insert into title values(1, '사장'),(2,'부장'),(3,'과장'),(4,'대리'),(5,'사원');
 
-insert into title value (2,'�ѹ�');
-
-select tno, tname from title where tno = 1;
-
-update title set tname = '����' where tno =1;
-
-delete from title where tno= 6;
+insert into title values(1,'사장');
+select * from title;
+delete from title where tno =5;
+drop table title;
+alter table title 
 
 select * from title;
-
-insert into title value(5,'���');
+delete from title where tno =6;

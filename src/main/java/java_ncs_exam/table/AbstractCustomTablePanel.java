@@ -23,6 +23,8 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 	public AbstractCustomTablePanel() {
 		initialize();
 	}
+
+	public abstract T getItem();
 	
 	public void loadData() {
 		initList();
@@ -34,7 +36,7 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 	}
 	
 	public abstract void initList();
-	
+
 	private void initialize() {
 		setLayout(new BorderLayout(0, 0));
 		
@@ -45,10 +47,9 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 		table.setModel(getModel());
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(table);
-		table.getTableHeader().setReorderingAllowed(false);
 	}
-
-	public  DefaultTableModel getModel() {
+	
+	public DefaultTableModel getModel() {
 		CustomTableModel model = new CustomTableModel();
 		return model;
 	}
@@ -69,6 +70,7 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 		RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
 		table.setRowSorter(sorter);
 		
+		table.getTableHeader().setReorderingAllowed(false);
 		setAlignAndWidth();
 	}
 	
@@ -100,7 +102,7 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 	private class CustomTableModel extends DefaultTableModel{
 		
 		public CustomTableModel() {
-			// TODO Auto-generated constructor stub
+
 		}
 
 		public CustomTableModel(Object[][] data, Object[] columnNames) {
@@ -112,5 +114,4 @@ public abstract class AbstractCustomTablePanel<T> extends JPanel {
 			return false;
 		}
 	}
-
 }

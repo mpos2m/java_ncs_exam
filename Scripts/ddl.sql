@@ -6,7 +6,7 @@ show tables;
 
 
 create table title (
-	tno int not null,
+	tno int not null primary key,
 	tname varchar(20) not null);
 	
 select * from title;

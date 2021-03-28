@@ -7,15 +7,19 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.border.EmptyBorder;
 
-import java_ncs_exam.content.AbstractContentPanel;
+import java_ncs_exam.exception.InvalidCheckException;
+import java_ncs_exam.exception.LengthCheckException;
+import java_ncs_exam.exception.NotSelectedException;
+import java_ncs_exam.panel.AbstractContentPanel;
 import java_ncs_exam.table.AbstractCustomTablePanel;
 
 @SuppressWarnings("serial")
-public abstract class AbstractManagerUI<T> extends JFrame implements ActionListener{
+public abstract class AbstractManagerUI<T> extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	protected JButton btnAdd;
@@ -23,12 +27,15 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 	
 	protected AbstractContentPanel<T> pContent;
 	protected AbstractCustomTablePanel<T> pList;
+	protected JMenuItem empListByTitleItem;
 	
 	
 	public AbstractManagerUI() {
-		setService();
+		setService();//service 연결
+		
 		initialize();
-		tableLoadData();
+		
+		tableLoadData();//component load data
 	}
 
 	private void initialize() {
@@ -85,6 +92,7 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 				if (e.getActionCommand().equals("수정")) {
 					actionPerformedMenuUpdate();
 				}
+				
 			}else {
 				if (e.getSource() == btnClear) {
 					actionPerformedBtnClear(e);
@@ -98,6 +106,8 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 					}
 				}
 			}
+		}catch (InvalidCheckException | LengthCheckException | NotSelectedException e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -120,5 +130,4 @@ public abstract class AbstractManagerUI<T> extends JFrame implements ActionListe
 			btnAdd.setText("추가");
 		}
 	}
-
 }
